@@ -6,8 +6,11 @@ displayWidth, displayHeight = 700, 800
 
 gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
 pygame.display.set_caption('Basic Pygame Template')
+clock = pygame.time.Clock()
 
 # ----------- Constants ---------------
+FPS = 60
+backgroundColor = "black"
 
 
 # ----------- Main Game Function ---------------
@@ -18,10 +21,11 @@ def runGame():
 
 # ----------- Start Of Game Loop ---------------
 	while gameRunning:
+		gameDisplay.fill(backgroundColor)
 
 # ----------- Game Over Menu -------------------
+#	Use this loop as a template for any other screens you want to add.
 		while gameOver == True:
-			gameDisplay.fill(white)
 			pygame.display.update()
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
@@ -39,34 +43,37 @@ def runGame():
 			if event.type == pygame.QUIT:
 				gameRunning = False
 			if event.type == pygame.MOUSEBUTTONUP:
-				pass
+				print(f'Mouse was clicked at {pygame.mouse.get_pos()}')
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_LEFT or event.key == ord('a'):
 					print('left')
 				if event.key == pygame.K_RIGHT or event.key == ord('d'):
 					print('right')
 				if event.key == pygame.K_UP or event.key == ord('w'):
-					print('jump')
+					print('up')
 				if event.key == pygame.K_DOWN or event.key == ord('s'):
 					print('down')
 
 			if event.type == pygame.KEYUP:
 				if event.key == pygame.K_LEFT or event.key == ord('a'):
 					print('left stop')
-				 if event.key == pygame.K_RIGHT or event.key == ord('d'):
+				if event.key == pygame.K_RIGHT or event.key == ord('d'):
 					print('right stop')
+				if event.key == pygame.K_UP or event.key == ord('w'):
+					print('up stop')
 				if event.key == pygame.K_DOWN or event.key == ord('s'):
 					print('down stop')
 				if event.key == ord('q'):
 					pygame.quit()
-					sys.exit()
 					gameRunning = False
+					exit()
 
 #  ----------- Game Code -------------------
+		# Draw
+
 		# Update
 		pygame.display.update()
-
-		# Draw
+		clock.tick(FPS)
 
 		
 if __name__ == "__main__":
